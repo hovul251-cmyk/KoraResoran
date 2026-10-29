@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>KORA — Ресторан северной кухни и дровяного очага</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        bark: {
+                            900: '#14120E',
+                            800: '#1C1917',
+                            700: '#28231D',
+                            200: '#E6E1DA',
+                            100: '#F4F1EA',
+                            50: '#FAF8F5'
+                        },
+                        amberAccent: '#C87D55'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+        ::selection {
+            background-color: #C87D55;
+            color: #FAF8F5;
+        }
+        .grain-bg {
+            background-image: radial-gradient(rgba(20, 18, 14, 0.04) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-bark-50 text-bark-800 antialiased font-sans flex flex-col min-h-screen grain-bg">
+
+    <!-- НАВИГАЦИЯ -->
+    <header class="sticky top-0 z-40 bg-bark-50/90 backdrop-blur-md border-b border-bark-200">
+        <div class="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between">
+            <a href="#" class="flex flex-col">
+                <span class="font-serif text-2xl font-bold tracking-widest text-bark-900 uppercase">K O R A</span>
+                <span class="text-[9px] uppercase tracking-[0.25em] text-bark-700/70 -mt-1 font-sans">Очаг и дикоросы</span>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-8 text-xs uppercase tracking-widest font-medium text-bark-700">
+                <a href="#about" class="hover:text-amberAccent transition-colors">О проекте</a>
+                <a href="#menu" class="hover:text-amberAccent transition-colors">Меню</a>
+                <a href="#reserve" class="hover:text-amberAccent transition-colors">Бронь</a>
+                <a href="#contacts" class="hover:text-amberAccent transition-colors">Контакты</a>
+            </nav>
+
+            <a href="#reserve" class="px-5 py-2.5 bg-bark-900 text-bark-50 text-xs uppercase tracking-widest font-medium rounded hover:bg-amberAccent transition-colors">
+                Забронировать
+            </a>
+        </div>
+    </header>
+
+    <!-- ПЕРВЫЙ ЭКРАН -->
+    <section class="relative min-h-[82vh] flex items-center justify-center bg-bark-900 text-bark-100 px-5 py-20 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img 
+                src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1800&q=80" 
+                alt="Кухня на огне" 
+                class="w-full h-full object-cover opacity-25 filter brightness-75 scale-105"
+            >
+            <div class="absolute inset-0 bg-gradient-to-t from-bark-900 via-bark-900/40 to-bark-900/80"></div>
+        </div>
+
+        <div class="relative z-10 max-w-3xl mx-auto text-center">
+            <span class="inline-block text-[11px] uppercase tracking-[0.3em] text-amberAccent mb-4 border border-amberAccent/40 px-3 py-1 rounded-full">
+                Северная гастрономия &middot; Дровяная печь
+            </span>
+            <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl font-normal leading-tight tracking-tight text-white mb-6">
+                Чистый вкус леса, <br><span class="italic font-normal">огня и времени</span>
+            </h1>
+            <p class="text-sm sm:text-base text-bark-200/80 font-light max-w-xl mx-auto mb-8 leading-relaxed">
+                Мы готовим из дикоросов карельских лесов, локальной рыбы и мяса свободного выпаса на открытом березовом огне.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#menu" class="w-full sm:w-auto px-8 py-3.5 bg-amberAccent text-white text-xs uppercase tracking-widest font-semibold rounded hover:bg-amberAccent/90 transition-all shadow-md">
+                    Смотреть меню
+                </a>
+                <a href="#reserve" class="w-full sm:w-auto px-8 py-3.5 bg-transparent border border-bark-200/40 text-bark-100 text-xs uppercase tracking-widest font-medium rounded hover:bg-white/10 transition-colors">
+                    Заказать столик
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- КОРОТКО О КОНЦЕПЦИИ -->
+    <section id="about" class="py-16 px-5 border-b border-bark-200">
+        <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+            <div>
+                <span class="font-serif text-2xl text-amberAccent block mb-1">01</span>
+                <h3 class="font-serif text-lg font-bold text-bark-900 mb-2">Березовый очаг</h3>
+                <p class="text-xs text-bark-700/80 leading-relaxed">Вся термическая обработка происходит в массивной печи без использования газовых плит.</p>
+            </div>
+            <div>
+                <span class="font-serif text-2xl text-amberAccent block mb-1">02</span>
+                <h3 class="font-serif text-lg font-bold text-bark-900 mb-2">Дикоросы и хвоя</h3>
+                <p class="text-xs text-bark-700/80 leading-relaxed">Грибы, брусника, побеги ели и можжевельник заготавливаются нашими экспедициями сезонно.</p>
+            </div>
+            <div>
+                <span class="font-serif text-2xl text-amberAccent block mb-1">03</span>
+                <h3 class="font-serif text-lg font-bold text-bark-900 mb-2">Долгая ферментация</h3>
+                <p class="text-xs text-bark-700/80 leading-relaxed">Собственный хлеб на 60-часовой закваске, домашние уксусы и выдержанные соусы коджи.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- МЕНЮ РЕСТОРАНА -->
+    <section id="menu" class="py-20 px-5 max-w-6xl mx-auto w-full">
+        <div class="text-center max-w-xl mx-auto mb-12">
+            <span class="text-xs uppercase tracking-widest text-amberAccent font-semibold">Актуальная подача</span>
+            <h2 class="font-serif text-3xl sm:text-4xl text-bark-900 font-bold mt-2">Меню сезона</h2>
+            <div class="w-12 h-0.5 bg-amberAccent mx-auto mt-4"></div>
+        </div>
+
+        <!-- Фильтры категорий -->
+        <div class="flex items-center justify-center flex-wrap gap-2 mb-10 text-xs">
+            <button onclick="filterMenu('all')" class="menu-tab active px-4 py-2 rounded-full bg-bark-900 text-white font-medium transition-colors">Все позиции</button>
+            <button onclick="filterMenu('starters')" class="menu-tab px-4 py-2 rounded-full bg-white border border-bark-200 text-bark-800 font-medium hover:border-bark-900 transition-colors">Закуски</button>
+            <button onclick="filterMenu('mains')" class="menu-tab px-4 py-2 rounded-full bg-white border border-bark-200 text-bark-800 font-medium hover:border-bark-900 transition-colors">Огонь и дичь</button>
+            <button onclick="filterMenu('desserts')" class="menu-tab px-4 py-2 rounded-full bg-white border border-bark-200 text-bark-800 font-medium hover:border-bark-900 transition-colors">Десерты</button>
+            <button onclick="filterMenu('drinks')" class="menu-tab px-4 py-2 rounded-full bg-white border border-bark-200 text-bark-800 font-medium hover:border-bark-900 transition-colors">Напитки & Вино</button>
+        </div>
+
+        <!-- Сетка карточек меню -->
+        <div id="menuGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Блюда генерируются через JS -->
+        </div>
+    </section>
+
+    <!-- БРОНИРОВАНИЕ СТОЛИКА -->
+    <section id="reserve" class="py-20 bg-bark-900 text-bark-100 px-5 border-t border-bark-800">
+        <div class="max-w-3xl mx-auto">
+            <div class="text-center mb-10">
+                <span class="text-xs uppercase tracking-widest text-amberAccent font-medium">Гостеприимство</span>
+                <h2 class="font-serif text-3xl sm:text-4xl text-white font-bold mt-2">Заказать столик</h2>
+                <p class="text-xs sm:text-sm text-bark-200/70 mt-2">
+                    Подтверждение бронирования отправляется мгновенно в SMS и WhatsApp.
+                </p>
+            </div>
+
+            <form id="bookingForm" onsubmit="handleBooking(event)" class="bg-bark-800/80 border border-bark-700/80 p-6 sm:p-8 rounded-lg shadow-xl space-y-5">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-bark-200 mb-2">Ваше имя</label>
+                        <input type="text" required placeholder="Константин" class="w-full bg-bark-900/90 border border-bark-700 rounded px-3.5 py-2.5 text-sm text-white placeholder-bark-700 focus:outline-none focus:border-amberAccent">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-bark-200 mb-2">Номер телефона</label>
+                        <input type="tel" required placeholder="+7 (999) 000-00-00" class="w-full bg-bark-900/90 border border-bark-700 rounded px-3.5 py-2.5 text-sm text-white placeholder-bark-700 focus:outline-none focus:border-amberAccent">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-bark-200 mb-2">Дата</label>
+                        <input type="date" id="bookDate" required class="w-full bg-bark-900/90 border border-bark-700 rounded px-3 py-2.5 text-sm text-white focus:outline-none focus:border-amberAccent">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-bark-200 mb-2">Время</label>
+                        <select class="w-full bg-bark-900 border border-bark-700 rounded px-3 py-2.5 text-sm text-white focus:outline-none focus:border-amberAccent">
+                            <option>13:00 (Обед)</option>
+                            <option>15:00 (Обед)</option>
+                            <option selected>18:30 (Вечерний сервис)</option>
+                            <option>20:00 (Вечерний сервис)</option>
+                            <option>21:30 (Вечерний сервис)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-bark-200 mb-2">Количество гостей</label>
+                        <select class="w-full bg-bark-900 border border-bark-700 rounded px-3 py-2.5 text-sm text-white focus:outline-none focus:border-amberAccent">
+                            <option>1 персона</option>
+                            <option selected>2 персоны</option>
+                            <option>3–4 персоны</option>
+                            <option>5–8 персон (Большой стол)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-bark-200 mb-2">Пожелания (аллергии, повод, предпочтения по залу)</label>
+                    <textarea rows="2" placeholder="Например: столик у дровяного очага, день рождения..." class="w-full bg-bark-900/90 border border-bark-700 rounded px-3.5 py-2.5 text-sm text-white placeholder-bark-700 focus:outline-none focus:border-amberAccent"></textarea>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" class="w-full py-3.5 bg-amberAccent hover:bg-amberAccent/90 text-white font-semibold text-xs uppercase tracking-widest rounded transition-all shadow-md active:scale-[0.99]">
+                        Забронировать стол
+                    </button>
+                    <p class="text-[11px] text-center text-bark-200/50 mt-3">Бронь удерживается в течение 15 минут от указанного времени.</p>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- КОНТАКТЫ И ЧАСЫ РАБОТЫ -->
+    <footer id="contacts" class="bg-bark-900 border-t border-bark-800 text-bark-200 py-14 px-5">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <span class="font-serif text-2xl font-bold tracking-widest text-white block mb-2">KORA</span>
+                <p class="text-xs text-bark-200/70 leading-relaxed max-w-xs">
+                    Гастрономический проект северной кухни на дровах. Мы соединяем дикую природу с бережным ресторанным ремеслом.
+                </p>
+            </div>
+
+            <div>
+                <h4 class="text-xs uppercase tracking-widest font-semibold text-white mb-3">Локация и бронь</h4>
+                <p class="text-xs leading-relaxed text-bark-200/80">
+                    Санкт-Петербург, наб. реки Мойки, 44<br>
+                    Телефон: <a href="tel:+78129004020" class="text-amberAccent hover:underline">+7 (812) 900-40-20</a><br>
+                    Почта: info@kora-restaurant.ru
+                </p>
+            </div>
+
+            <div>
+                <h4 class="text-xs uppercase tracking-widest font-semibold text-white mb-3">Время работы</h4>
+                <p class="text-xs leading-relaxed text-bark-200/80">
+                    Вс – Чт: 12:00 — 23:00<br>
+                    Пт – Сб: 12:00 — 01:00<br>
+                    <span class="text-amberAccent">Печной сервис открывается с 13:00</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="max-w-6xl mx-auto border-t border-bark-800 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-bark-200/40">
+            <span>© 2026 KORA Restaurant. Все права защищены.</span>
+            <span>Учебный проект для портфолио</span>
+        </div>
+    </footer>
+
+    <!-- СЦЕНАРИЙ УПРАВЛЕНИЯ МЕНЮ И БРОНИРОВАНИЕМ -->
+    <script>
+        const menuItems = [
+            {
+                id: 1,
+                name: "Тартар из карельского оленя",
+                category: "starters",
+                weight: "140 г",
+                price: "890 ₽",
+                desc: "Вяленый можжевельник, соус из копченой брусники, чипс из ржаного льна.",
+                image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=700&q=80"
+            },
+            {
+                id: 2,
+                name: "Гребешок с соусом из елового масла",
+                category: "starters",
+                weight: "120 г",
+                price: "1 150 ₽",
+                desc: "Опаленный гребешок, крем из печеного пастернака, ферментированное яблоко.",
+                image: "https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=700&q=80"
+            },
+            {
+                id: 3,
+                name: "Печеная нельма на березовом полене",
+                category: "mains",
+                weight: "260 г",
+                price: "1 680 ₽",
+                desc: "Северная рыба медленного копчения в печи, томленая полба, пена из белых грибов.",
+                image: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=700&q=80"
+            },
+            {
+                id: 4,
+                name: "Утиная грудка с томленой вишней и можжевельником",
+                category: "mains",
+                weight: "240 г",
+                price: "1 420 ₽",
+                desc: "Обожженная на углях утка, пюре из топинамбура, густой демигляс на черной смородине.",
+                image: "https://images.unsplash.com/photo-1514944298352-f418386348ef?auto=format&fit=crop&w=700&q=80"
+            },
+            {
+                id: 5,
+                name: "Мороженое из копченых шишек",
+                category: "desserts",
+                weight: "110 г",
+                price: "560 ₽",
+                desc: "Карамель из печеной коры дуба, крошка бородинского хлеба и свежая морошка.",
+                image: "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?auto=format&fit=crop&w=700&q=80"
+            },
+            {
+                id: 6,
+                name: "Настойка на дикой облепихе и розмарине",
+                category: "drinks",
+                weight: "50 мл",
+                price: "390 ₽",
+                desc: "Домашняя мацерация с северным медом и дикорастущим лесным розмарином.",
+                image: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=700&q=80"
+            }
+        ];
+
+        function renderMenu(items) {
+            const grid = document.getElementById('menuGrid');
+            grid.innerHTML = '';
+
+            items.forEach(dish => {
+                const card = document.createElement('div');
+                card.className = "bg-white border border-bark-200 rounded-lg overflow-hidden flex flex-col justify-between hover:shadow-lg transition-all duration-300";
+                card.innerHTML = `
+                    <div>
+                        <div class="h-48 w-full overflow-hidden relative">
+                            <img src="${dish.image}" alt="${dish.name}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-3 right-3 bg-bark-900/80 backdrop-blur-sm text-bark-100 text-[11px] px-2.5 py-1 rounded font-medium">${dish.weight}</span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-serif text-lg font-bold text-bark-900 leading-snug">${dish.name}</h3>
+                            <p class="text-xs text-bark-700/80 mt-2 leading-relaxed">${dish.desc}</p>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0 flex items-center justify-between border-t border-bark-100 mt-2">
+                        <span class="font-serif text-xl font-bold text-amberAccent">${dish.price}</span>
+                        <a href="#reserve" class="text-xs uppercase tracking-wider font-semibold text-bark-900 hover:text-amberAccent transition-colors">
+                            Заказать к столу &rarr;
+                        </a>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterMenu(category) {
+            document.querySelectorAll('.menu-tab').forEach(btn => {
+                btn.className = "menu-tab px-4 py-2 rounded-full bg-white border border-bark-200 text-bark-800 font-medium hover:border-bark-900 transition-colors";
+            });
+            event.target.className = "menu-tab active px-4 py-2 rounded-full bg-bark-900 text-white font-medium transition-colors";
+
+            if (category === 'all') {
+                renderMenu(menuItems);
+            } else {
+                renderMenu(menuItems.filter(item => item.category === category));
+            }
+        }
+
+        function handleBooking(e) {
+            e.preventDefault();
+            alert("Благодарим вас! Столик успешно забронирован. Мы отправили подтверждение по SMS.");
+            e.target.reset();
+        }
+
+        // Автоподстановка сегодняшней даты
+        window.addEventListener('DOMContentLoaded', () => {
+            renderMenu(menuItems);
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('bookDate').value = today;
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
