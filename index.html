@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>KORA — Ресторан северной кухни на дровах</title>
+    <title>KORA — Ресторан северной кухни и дровяного очага</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,8 +23,8 @@
                             dark: '#1C1917',
                             clay: '#9C5838',
                             amber: '#C87D55',
-                            cream: '#F7F4EE',
-                            badge: '#F2EBE1'
+                            cream: '#FAF8F5',
+                            badge: '#F3EFEA'
                         }
                     }
                 }
@@ -41,24 +41,24 @@
 </head>
 <body class="text-stone-900 antialiased font-sans pb-24">
 
-    <!-- ВСПЛЫВАЮЩЕЕ МЕНЮ -->
-    <div id="restMenu" class="fixed inset-0 z-50 bg-[#FAF8F5]/98 backdrop-blur-md -translate-y-full transition-transform duration-300 flex flex-col p-6">
+    <!-- ВСПЛЫВАЮЩЕЕ МЕНЮ НАВИГАЦИИ -->
+    <div id="navDrawer" class="fixed inset-0 z-50 bg-[#FAF8F5]/98 backdrop-blur-md -translate-y-full transition-transform duration-300 flex flex-col p-6">
         <div class="flex items-center justify-between pb-6 border-b border-stone-200">
             <span class="font-serif text-2xl font-bold tracking-widest text-stone-900 uppercase">K O R A</span>
-            <button onclick="toggleMenu()" class="p-2 text-stone-500">
+            <button onclick="toggleNav()" class="p-2 text-stone-500">
                 <i data-lucide="x" class="w-6 h-6"></i>
             </button>
         </div>
         <div class="flex flex-col gap-5 text-base font-bold text-stone-800 pt-8">
-            <a href="#menu-block" onclick="toggleMenu()">Меню кухни</a>
-            <a href="#menu-block" onclick="toggleMenu()">Винная карта</a>
-            <a href="#reserve-card" onclick="toggleMenu()">Бронирование столика</a>
-            <a href="#reserve-card" onclick="toggleMenu()">Шеф-тейбл</a>
-            <a href="#contacts" onclick="toggleMenu()">Контакты и схема проезда</a>
+            <a href="#menu-catalog" onclick="toggleNav()">Меню и предзаказ блюд</a>
+            <a href="#zones" onclick="toggleNav()">Залы и зоны посадки</a>
+            <a href="#philosophy" onclick="toggleNav()">Происхождение продуктов</a>
+            <a href="#reserve-section" onclick="toggleNav()">Бронирование стола</a>
+            <a href="#contacts" onclick="toggleNav()">Контакты и парковка</a>
         </div>
         <div class="mt-auto pt-6 border-t border-stone-200">
             <a href="tel:+78129004020" class="block text-xl font-extrabold text-kora-clay mb-1">+7 (812) 900-40-20</a>
-            <p class="text-xs text-stone-400">Санкт-Петербург, наб. реки Мойки, 44</p>
+            <p class="text-xs text-stone-400">СПб, наб. реки Мойки, 44 &middot; Свой паркинг</p>
         </div>
     </div>
 
@@ -74,123 +74,94 @@
                         KORA
                     </div>
                     <div class="text-[9px] text-stone-400 font-semibold tracking-wider uppercase -mt-0.5">
-                        Очаг &middot; Дикоросы
+                        Ресторан &middot; Очаг
                     </div>
                 </div>
             </a>
+            
             <div class="flex items-center gap-3">
+                <!-- Индикатор предзаказа -->
+                <a href="#reserve-section" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-stone-100 text-stone-700 text-xs font-bold hover:bg-stone-200 transition-colors">
+                    <i data-lucide="utensils" class="w-3.5 h-3.5 text-kora-clay"></i>
+                    <span id="orderCount">0</span>
+                </a>
                 <a href="tel:+78129004020" class="text-sm font-extrabold text-stone-900 tracking-tight hover:text-kora-clay">
                     +7 812 900-40-20
                 </a>
-                <button onclick="toggleMenu()" class="p-1.5 text-stone-700">
+                <button onclick="toggleNav()" class="p-1.5 text-stone-700">
                     <i data-lucide="menu" class="w-6 h-6 stroke-[2.2]"></i>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- ОСНОВНОЙ КОНТЕНТ -->
     <main class="max-w-2xl mx-auto px-4 pt-3">
-        <div class="text-[12px] text-stone-400 font-medium mb-3">Главная &middot; Ресторан</div>
+        <div class="text-[12px] text-stone-400 font-medium mb-3">Главная &middot; Северная гастрономия</div>
 
-        <!-- СЛАЙДЕР С ПОЛОСКАМИ -->
+        <!-- СЛАЙДЕР С ФОТОГРАФИЯМИ ЗАВЕДЕНИЯ -->
         <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-stone-200 shadow-sm border border-stone-200 mb-5">
             <img 
-                id="heroImg"
+                id="heroImage"
                 src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80" 
-                alt="Кухня на огне" 
+                alt="Подача на огне" 
                 class="w-full h-full object-cover transition-opacity duration-300"
             >
             <div class="absolute bottom-3 left-0 right-0 flex justify-center items-center gap-2 z-10">
-                <button onclick="setSlide(0)" class="slide-dot w-8 h-1 rounded-full bg-white transition-all"></button>
-                <button onclick="setSlide(1)" class="slide-dot w-8 h-1 rounded-full bg-white/40 transition-all"></button>
-                <button onclick="setSlide(2)" class="slide-dot w-8 h-1 rounded-full bg-white/40 transition-all"></button>
+                <button onclick="changeSlide(0)" class="hero-dot w-8 h-1 rounded-full bg-white transition-all"></button>
+                <button onclick="changeSlide(1)" class="hero-dot w-8 h-1 rounded-full bg-white/40 transition-all"></button>
+                <button onclick="changeSlide(2)" class="hero-dot w-8 h-1 rounded-full bg-white/40 transition-all"></button>
             </div>
         </div>
 
         <!-- ЗАГОЛОВОК И СЛОГАН -->
         <div class="mb-5">
             <h1 class="text-[26px] sm:text-3xl font-extrabold text-stone-900 leading-[1.2] tracking-tight">
-                Северная кухня на березовом очаге
+                Гастрономия огня, дичи и карельских дикоросов
             </h1>
             <p class="font-script text-2xl sm:text-3xl text-kora-clay font-semibold mt-1">
-                чистый вкус леса, огня и времени
+                от лесной экспедиции — прямо на угли
             </p>
         </div>
 
         <!-- ПЛАШКИ-БЕЙДЖИ ПРЕИМУЩЕСТВ -->
         <div class="flex flex-wrap gap-2 mb-5">
-            <div class="px-3.5 py-2 bg-kora-badge border border-stone-200 rounded-xl text-xs font-bold text-stone-800">
-                дегустационный сет от 4 800 ₽
+            <div class="px-3.5 py-2 bg-kora-badge border border-stone-200/80 rounded-xl text-xs font-bold text-stone-800">
+                печной сервис с 13:00
             </div>
-            <div class="px-3.5 py-2 bg-kora-badge border border-stone-200 rounded-xl text-xs font-bold text-stone-800">
-                дровяная печь 430°C
+            <div class="px-3.5 py-2 bg-kora-badge border border-stone-200/80 rounded-xl text-xs font-bold text-stone-800">
+                3 атмосферные зоны зала
             </div>
-            <div class="px-3.5 py-2 bg-kora-badge border border-stone-200 rounded-xl text-xs font-bold text-stone-800">
-                дикоросы Карелии
+            <div class="px-3.5 py-2 bg-kora-badge border border-stone-200/80 rounded-xl text-xs font-bold text-stone-800">
+                винный пейринг от сомелье
             </div>
         </div>
 
         <!-- КНОПКИ ДЕЙСТВИЯ -->
         <div class="space-y-3 mb-6">
-            <a href="#menu-block" class="block w-full py-4 text-center text-sm font-bold text-white bg-kora-clay hover:bg-stone-800 rounded-2xl transition-all shadow-sm active:scale-[0.99]">
-                Посмотреть меню
+            <a href="#menu-catalog" class="block w-full py-4 text-center text-sm font-bold text-white bg-kora-clay hover:bg-stone-800 rounded-2xl transition-all shadow-sm active:scale-[0.99]">
+                Выбрать блюда и меню
             </a>
-            <a href="#reserve-card" class="block w-full py-4 text-center text-sm font-bold text-kora-clay bg-white border-2 border-kora-clay rounded-2xl transition-all hover:bg-stone-50 active:scale-[0.99]">
-                Забронировать столик
+            <a href="#reserve-section" class="block w-full py-4 text-center text-sm font-bold text-kora-clay bg-white border-2 border-kora-clay rounded-2xl transition-all hover:bg-stone-50 active:scale-[0.99]">
+                Забронировать стол
             </a>
         </div>
 
         <!-- РЕЙТИНГ -->
         <div class="flex items-center gap-1.5 text-xs font-bold text-stone-800 mb-6">
             <span class="text-amber-600 text-sm">★</span>
-            <span>4,9 · 240 отзывов на Яндекс.Картах и WhereToEat</span>
+            <span>4,95 · ТОП-10 ресторанов СПб по версии WhereToEat 2025</span>
         </div>
 
-        <!-- КАРТОЧКА БРОНИРОВАНИЯ -->
-        <section id="reserve-card" class="bg-white border border-stone-200 rounded-3xl p-5 sm:p-6 shadow-sm mb-10">
-            <h2 class="text-xl font-extrabold text-stone-900 mb-4">
-                Заказать столик
-            </h2>
-            <form onsubmit="handleReserve(event)" class="space-y-3.5">
-                <div>
-                    <input type="text" required placeholder="Ваше имя" class="w-full bg-white border border-stone-200 rounded-xl px-4 py-3 text-sm text-stone-800 placeholder-stone-400 focus:outline-none focus:border-kora-clay">
-                </div>
-                <div>
-                    <input type="tel" id="restPhone" required placeholder="+7 (___) ___-__-__" class="w-full bg-white border border-stone-200 rounded-xl px-4 py-3 text-sm text-stone-800 placeholder-stone-400 focus:outline-none focus:border-kora-clay">
-                </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <input type="date" id="bookDate" required class="w-full bg-white border border-stone-200 rounded-xl px-3 py-3 text-xs text-stone-800 focus:outline-none focus:border-kora-clay">
-                    <select class="w-full bg-white border border-stone-200 rounded-xl px-3 py-3 text-xs text-stone-800 focus:outline-none focus:border-kora-clay">
-                        <option>2 персоны</option>
-                        <option>3–4 персоны</option>
-                        <option>5+ персон</option>
-                    </select>
-                </div>
-                <div class="flex items-center gap-2.5 pt-1">
-                    <input type="checkbox" id="c1" required class="w-4 h-4 rounded border-stone-300 text-kora-clay focus:ring-kora-clay">
-                    <label for="c1" class="text-[11px] text-stone-500">
-                        Согласие на <span class="underline text-stone-700">обработку данных</span>
-                    </label>
-                </div>
-                <div class="pt-2">
-                    <button type="submit" class="w-full py-4 text-center text-sm font-bold text-white bg-stone-900 hover:bg-kora-clay rounded-2xl transition-all shadow-sm active:scale-[0.99]">
-                        Подтвердить бронь
-                    </button>
-                </div>
-            </form>
-        </section>
-
-        <!-- ВКЛАДКИ МЕНЮ -->
-        <section id="menu-block" class="pt-2 mb-10">
+        <!-- СЕКЦИЯ: ИНТЕРАКТИВНЫЙ КАТАЛОГ БЛЮД С ПРЕДЗАКАЗОМ -->
+        <section id="menu-catalog" class="pt-2 mb-10">
             <div class="flex items-center justify-between gap-2 border-b border-stone-200 pb-3 mb-5 overflow-x-auto">
-                <button onclick="switchDish('starters')" id="t-starters" class="tab-btn active text-sm font-extrabold text-stone-900 pb-1 border-b-2 border-kora-clay shrink-0">
+                <button onclick="filterCatalog('starters')" id="tab-starters" class="cat-btn active text-sm font-extrabold text-stone-900 pb-1 border-b-2 border-kora-clay shrink-0">
                     Закуски
                 </button>
-                <button onclick="switchDish('mains')" id="t-mains" class="tab-btn text-sm font-bold text-stone-400 pb-1 hover:text-stone-700 shrink-0">
+                <button onclick="filterCatalog('mains')" id="tab-mains" class="cat-btn text-sm font-bold text-stone-400 pb-1 hover:text-stone-700 shrink-0">
                     Огонь и дичь
                 </button>
-                <button onclick="switchDish('desserts')" id="t-desserts" class="tab-btn text-sm font-bold text-stone-400 pb-1 hover:text-stone-700 shrink-0">
+                <button onclick="filterCatalog('desserts')" id="tab-desserts" class="cat-btn text-sm font-bold text-stone-400 pb-1 hover:text-stone-700 shrink-0">
                     Десерты
                 </button>
             </div>
@@ -199,118 +170,237 @@
             <div class="bg-white border border-stone-200 rounded-2xl overflow-hidden shadow-xs">
                 <div class="aspect-[16/10] overflow-hidden relative">
                     <img id="dishImg" src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" alt="Блюдо" class="w-full h-full object-cover">
-                    <div id="dishBadge" class="absolute top-3 left-3 bg-stone-900 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg">
-                        Выбор шефа
+                    <div id="dishTag" class="absolute top-3 left-3 bg-stone-900 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg">
+                        Хит сезона
                     </div>
                 </div>
                 <div class="p-4 sm:p-5">
                     <div class="flex justify-between items-start mb-2">
                         <div>
-                            <h3 id="dishTitle" class="text-base font-extrabold text-stone-900">Тартар из карельского оленя</h3>
-                            <p id="dishSpecs" class="text-xs text-stone-400 mt-0.5">140 г &middot; Вяленый можжевельник</p>
+                            <h3 id="dishTitle" class="text-base font-extrabold text-stone-900">Тартар из оленя с можжевельником</h3>
+                            <p id="dishMeta" class="text-xs text-stone-400 mt-0.5">140 г &middot; Вяленая брусника, чипс из льна</p>
                         </div>
-                        <div id="dishPrice" class="text-right font-extrabold text-kora-clay text-base">
+                        <div id="dishCost" class="text-right font-extrabold text-kora-clay text-base">
                             890 ₽
                         </div>
                     </div>
-                    <p id="dishDesc" class="text-xs text-stone-500 leading-relaxed mb-4">
-                        Подается с соусом из копченой брусники, чипсом из семян льна и ферментированным желтком.
+                    <p id="dishText" class="text-xs text-stone-500 leading-relaxed mb-4">
+                        Выдержанное мясо карельского оленя с легким копчением на сосновой щепе, соусом из лесных ягод и ферментированным желтком.
                     </p>
-                    <a href="#reserve-card" class="block w-full py-3 text-center bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-bold rounded-xl transition-colors">
-                        Заказать к столу
-                    </a>
+                    <button onclick="addToOrder()" class="w-full py-3 bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-bold rounded-xl transition-colors flex items-center justify-center gap-2">
+                        <i data-lucide="plus" class="w-4 h-4 text-kora-clay"></i>
+                        <span>Добавить к визиту (в предзаказ)</span>
+                    </button>
                 </div>
             </div>
         </section>
+
+        <!-- АРХИТЕКТУРНЫЕ ЗОНЫ ЗАЛА -->
+        <section id="zones" class="mb-10 bg-white border border-stone-200 rounded-3xl p-5 sm:p-6 shadow-sm">
+            <h2 class="text-lg font-extrabold text-stone-900 mb-1">Атмосферные пространства зала</h2>
+            <p class="text-xs text-stone-500 mb-4">Каждая зона имеет свое настроение и угол обзора на кухню.</p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-[#FAF8F5] border border-stone-200/70">
+                    <span class="font-bold text-stone-900 block mb-1">У открытого очага</span>
+                    <span class="text-stone-500 text-[11px]">Первая линия у березовой печи, наблюдение за работой шефа.</span>
+                </div>
+                <div class="p-3 rounded-xl bg-[#FAF8F5] border border-stone-200/70">
+                    <span class="font-bold text-stone-900 block mb-1">Каминная гостиная</span>
+                    <span class="text-stone-500 text-[11px]">Приглушенный свет, кресла из состаренной кожи, тихие беседы.</span>
+                </div>
+                <div class="p-3 rounded-xl bg-[#FAF8F5] border border-stone-200/70">
+                    <span class="font-bold text-stone-900 block mb-1">Зимний сад со мхами</span>
+                    <span class="text-stone-500 text-[11px]">Панорамные окна во внутренний двор с вековыми соснами.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ: БРОНИРОВАНИЕ СТОЛИКА С ВЫБОРОМ ЗОНЫ -->
+        <section id="reserve-section" class="bg-white border border-stone-200 rounded-3xl p-5 sm:p-6 shadow-sm mb-10">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-extrabold text-stone-900">
+                    Бронирование стола
+                </h2>
+                <span id="orderIndicator" class="text-[11px] font-bold text-kora-clay bg-kora-badge px-2.5 py-1 rounded-lg">
+                    Предзаказ: 0 блюд
+                </span>
+            </div>
+
+            <form onsubmit="confirmReservation(event)" class="space-y-3.5">
+                <div>
+                    <input type="text" required placeholder="Имя гостя" class="w-full bg-white border border-stone-200 rounded-xl px-4 py-3 text-sm text-stone-800 placeholder-stone-400 focus:outline-none focus:border-kora-clay">
+                </div>
+                <div>
+                    <input type="tel" id="guestPhone" required placeholder="+7 (___) ___-__-__" class="w-full bg-white border border-stone-200 rounded-xl px-4 py-3 text-sm text-stone-800 placeholder-stone-400 focus:outline-none focus:border-kora-clay">
+                </div>
+                
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[10px] uppercase font-bold text-stone-400 mb-1">Дата</label>
+                        <input type="date" id="reserveDate" required class="w-full bg-white border border-stone-200 rounded-xl px-3 py-2.5 text-xs text-stone-800 focus:outline-none focus:border-kora-clay">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] uppercase font-bold text-stone-400 mb-1">Время</label>
+                        <select class="w-full bg-white border border-stone-200 rounded-xl px-3 py-2.5 text-xs text-stone-800 focus:outline-none focus:border-kora-clay">
+                            <option>13:30 (Обед)</option>
+                            <option selected>18:30 (Вечерний сервис)</option>
+                            <option>20:30 (Вечерний сервис)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[10px] uppercase font-bold text-stone-400 mb-1">Гостей</label>
+                        <select class="w-full bg-white border border-stone-200 rounded-xl px-3 py-2.5 text-xs text-stone-800 focus:outline-none focus:border-kora-clay">
+                            <option>1 персона</option>
+                            <option selected>2 персоны</option>
+                            <option>3–4 персоны</option>
+                            <option>5+ персон</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] uppercase font-bold text-stone-400 mb-1">Зона зала</label>
+                        <select class="w-full bg-white border border-stone-200 rounded-xl px-3 py-2.5 text-xs text-stone-800 focus:outline-none focus:border-kora-clay">
+                            <option>У открытого очага</option>
+                            <option>Каминная гостиная</option>
+                            <option>Зимний сад</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2.5 pt-1">
+                    <input type="checkbox" id="termsConsent" required class="w-4 h-4 rounded border-stone-300 text-kora-clay focus:ring-kora-clay">
+                    <label for="termsConsent" class="text-[11px] text-stone-500">
+                        Согласие на <span class="underline text-stone-700">обработку данных</span>
+                    </label>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" class="w-full py-4 text-center text-sm font-bold text-white bg-stone-900 hover:bg-kora-clay rounded-2xl transition-all shadow-sm active:scale-[0.99]">
+                        Подтвердить резерв стола
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- О ПРОИСХОЖДЕНИИ СЫРЬЯ -->
+        <section id="philosophy" class="p-5 rounded-2xl bg-stone-100/70 border border-stone-200 text-xs text-stone-600 mb-6">
+            <h3 class="font-bold text-stone-900 text-sm mb-1">Локальные экспедиции и честный продукт</h3>
+            <p class="leading-relaxed">
+                Мы не закупаем замороженную фабричную рыбу. Вся нельма и форель прибывают из чистых озер Карелии и Ладоги, дичь поставляется охотничьими хозяйствами Северо-Запада, а хлеб выпекается на 60-часовой закваске прямо в дровяной печи.
+            </p>
+        </section>
     </main>
 
-    <!-- ПЛАВАЮЩИЕ КНОПКИ СВЯЗИ -->
+    <!-- ПЛАВАЮЩИЕ КНОПКИ БЫСТРОЙ СВЯЗИ -->
     <a href="https://wa.me/" target="_blank" class="fixed bottom-5 left-4 z-40 w-12 h-12 rounded-full bg-emerald-600 text-white flex items-center justify-center shadow-lg hover:scale-105 transition-all">
         <i data-lucide="message-circle" class="w-6 h-6 fill-white"></i>
     </a>
-    <a href="#reserve-card" class="fixed bottom-5 right-4 z-40 w-12 h-12 rounded-full bg-stone-900 text-white flex items-center justify-center shadow-lg hover:scale-105 transition-all">
+    <a href="#reserve-section" class="fixed bottom-5 right-4 z-40 w-12 h-12 rounded-full bg-stone-900 text-white flex items-center justify-center shadow-lg hover:scale-105 transition-all">
         <i data-lucide="calendar" class="w-5 h-5"></i>
     </a>
 
     <script>
-        const restSlides = [
+        // Слайдер
+        const sliderImgs = [
             "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80",
             "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
             "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=1200&q=80"
         ];
-        let slideIdx = 0;
-        function setSlide(i) {
-            slideIdx = i;
-            const img = document.getElementById('heroImg');
+        let currentSlide = 0;
+
+        function changeSlide(index) {
+            currentSlide = index;
+            const img = document.getElementById('heroImage');
             img.style.opacity = '0.3';
             setTimeout(() => {
-                img.src = restSlides[i];
+                img.src = sliderImgs[index];
                 img.style.opacity = '1';
             }, 150);
-            document.querySelectorAll('.slide-dot').forEach((d, idx) => {
-                d.className = idx === i ? "slide-dot w-8 h-1 rounded-full bg-white transition-all" : "slide-dot w-8 h-1 rounded-full bg-white/40 transition-all";
+
+            document.querySelectorAll('.hero-dot').forEach((dot, i) => {
+                dot.className = i === index ? "hero-dot w-8 h-1 rounded-full bg-white transition-all" : "hero-dot w-8 h-1 rounded-full bg-white/40 transition-all";
             });
         }
 
-        const dishData = {
+        // Каталог блюд
+        const catalogItems = {
             starters: {
-                title: "Тартар из карельского оленя",
-                specs: "140 г · Вяленый можжевельник",
-                price: "890 ₽",
-                desc: "Подается с соусом из копченой брусники, чипсом из семян льна и ферментированным желтком.",
+                title: "Тартар из оленя с можжевельником",
+                meta: "140 г · Вяленая брусника, чипс из льна",
+                cost: "890 ₽",
+                text: "Выдержанное мясо карельского оленя с легким копчением на сосновой щепе, соусом из лесных ягод и ферментированным желтком.",
                 img: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80",
-                badge: "Выбор шефа"
+                tag: "Хит сезона"
             },
             mains: {
-                title: "Печеная нельма на полене",
-                specs: "260 г · Томленая полба",
-                price: "1 680 ₽",
-                desc: "Северная рыба медленного копчения в березовой печи с соусом из белых таежных грибов.",
+                title: "Нельма на березовом полене",
+                meta: "260 г · Томленая полба с грибами",
+                cost: "1 680 ₽",
+                text: "Северная рыба медленного копчения в печи при 430°C. Подается с соусом из томленых белых грибов и печеной репой.",
                 img: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=800&q=80",
-                badge: "Фирменное"
+                tag: "Фирменное из печи"
             },
             desserts: {
-                title: "Мороженое из копченых шишек",
-                specs: "110 г · Морошка и дуб",
-                price: "560 ₽",
-                desc: "Карамель из печеной дубовой коры, крамбл из бородинского хлеба и свежая северная ягода.",
+                title: "Мороженое из копченых еловых шишек",
+                meta: "110 г · Морошка и дубовая карамель",
+                cost: "560 ₽",
+                text: "Карамель из печеной дубовой коры, крамбл из бородинского хлеба на закваске и свежая северная морошка.",
                 img: "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?auto=format&fit=crop&w=800&q=80",
-                badge: "Десерт сезона"
+                tag: "Десерт"
             }
         };
 
-        function switchDish(type) {
-            document.querySelectorAll('.tab-btn').forEach(b => {
-                b.className = "tab-btn text-sm font-bold text-stone-400 pb-1 hover:text-stone-700 shrink-0";
+        function filterCatalog(category) {
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.className = "cat-btn text-sm font-bold text-stone-400 pb-1 hover:text-stone-700 shrink-0";
             });
-            document.getElementById(`t-${type}`).className = "tab-btn active text-sm font-extrabold text-stone-900 pb-1 border-b-2 border-kora-clay shrink-0";
-            const d = dishData[type];
-            document.getElementById('dishTitle').innerText = d.title;
-            document.getElementById('dishSpecs').innerText = d.specs;
-            document.getElementById('dishPrice').innerText = d.price;
-            document.getElementById('dishDesc').innerText = d.desc;
-            document.getElementById('dishImg').src = d.img;
-            document.getElementById('dishBadge').innerText = d.badge;
+            document.getElementById(`tab-${category}`).className = "cat-btn active text-sm font-extrabold text-stone-900 pb-1 border-b-2 border-kora-clay shrink-0";
+
+            const item = catalogItems[category];
+            document.getElementById('dishTitle').innerText = item.title;
+            document.getElementById('dishMeta').innerText = item.meta;
+            document.getElementById('dishCost').innerText = item.cost;
+            document.getElementById('dishText').innerText = item.text;
+            document.getElementById('dishImg').src = item.img;
+            document.getElementById('dishTag').innerText = item.tag;
         }
 
-        const phone = document.getElementById('restPhone');
-        phone.addEventListener('input', (e) => {
+        // Логика предзаказа
+        let orderCount = 0;
+        function addToOrder() {
+            orderCount++;
+            document.getElementById('orderCount').innerText = orderCount;
+            document.getElementById('orderIndicator').innerText = `Предзаказ: ${orderCount} блюд`;
+            alert("Блюдо добавлено к предзаказу столика!");
+        }
+
+        // Маска для телефона
+        const guestPhone = document.getElementById('guestPhone');
+        guestPhone.addEventListener('input', (e) => {
             let x = e.target.value.replace(/\D/g, '').match(/(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
             e.target.value = !x[2] ? (x[1] ? '+7 (' : '') : `+7 (${x[2]}) ${x[3]}` + (x[4] ? `-${x[4]}` : '') + (x[5] ? `-${x[5]}` : '');
         });
 
-        function toggleMenu() {
-            document.getElementById('restMenu').classList.toggle('-translate-y-full');
+        // Навигация
+        function toggleNav() {
+            document.getElementById('navDrawer').classList.toggle('-translate-y-full');
         }
 
-        function handleReserve(e) {
+        // Подтверждение формы
+        function confirmReservation(e) {
             e.preventDefault();
-            alert("Столик успешно забронирован! Подтверждение отправлено в SMS.");
+            alert(`Спасибо! Столик забронирован.\nПредзаказанных позиций: ${orderCount}\nПодтверждение отправлено на указанный номер телефона.`);
+            orderCount = 0;
+            document.getElementById('orderCount').innerText = '0';
+            document.getElementById('orderIndicator').innerText = 'Предзаказ: 0 блюд';
             e.target.reset();
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('bookDate').value = new Date().toISOString().split('T')[0];
+            document.getElementById('reserveDate').value = new Date().toISOString().split('T')[0];
             lucide.createIcons();
         });
     </script>
